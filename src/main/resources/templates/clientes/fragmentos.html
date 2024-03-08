@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>VetPulse</title>
+    </head>
+    <body>
+        <!-- Sección para crear el botón de agregar -->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarCliente">
+                            <i class="fas fa-plus"></i> [[#{cliente.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fragmento para agregar cliente, es la ventana modal -->
+        <section th:fragment="agregarCliente">
+            <div id="agregarCliente" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{cliente.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/cliente/guardar}" th:object="${cliente}" method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <!-- Campos para agregar cliente -->
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">[[#{accion.guardar}]]</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLIENTES -->
+        <section th:fragment="listadoClientes" id="clientes">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{cliente.listado}]]</h4>
+                            </div>
+                            <div th:if="${clientes != null and !clientes.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>[[#{cliente.nombre}]]</th>
+                                            <th>[[#{cliente.direccion}]]</th>
+                                            <th>[[#{cliente.telefono}]]</th>
+                                            <!-- Otros campos relevantes -->
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="cliente, contador : ${clientes}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${cliente.nombre}]]</td>
+                                            <td>[[${cliente.direccion}]]</td>
+                                            <td>[[${cliente.telefono}]]</td>
+                                            <!-- Otros campos relevantes -->
+                                            <td>
+                                                <!-- Botones de acciones para cada cliente -->
+                                                <a th:href="@{/cliente/editar/}+${cliente.id}" class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
+                                                </a>
+                                                <a th:href="@{/cliente/eliminar/}+${cliente.id}" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${clientes == null or clientes.empty}">
+                                <span>[[#{lista.vacia}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Aquí puedes agregar cualquier otra sección adicional, como estadísticas -->
+                </div>
+            </div>
+        </section>
+
+        <!-- editarCliente -->
+        <section th:fragment="editarCliente">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST" th:action="@{/cliente/guardar}" th:object="${cliente}" class="was-validated">
+                        <!-- Aquí se pueden incluir campos ocultos si es necesario -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4>[[#{accion.actualizar}]]</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Campos de edición para el cliente -->
+                                            <div class="mb-3">
+                                                <label for="nombre">[[#{cliente.nombre}]]</label>
+                                                <input type="text" class="form-control" name="nombre" th:field="*{nombre}" required="true">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="direccion">[[#{cliente.direccion}]]</label>
+                                                <input type="text" class="form-control" name="direccion" th:field="*{direccion}" required="true">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="telefono">[[#{cliente.telefono}]]</label>
+                                                <input type="text" class="form-control" name="telefono" th:field="*{telefono}" required="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 d-grid">
+                                <a th:href="@{/cliente/listado}" class="btn btn-primary">
+                                    <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">                                
+                                <a th:href="@{/cliente/eliminar/}+${cliente.id}" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- BOTONES EDITAR -->
+        <section th:fragment="botonesEditar">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/cliente/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/cliente/eliminar/}+${cliente.id}" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>
+
