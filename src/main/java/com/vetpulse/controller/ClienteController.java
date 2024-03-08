@@ -3,7 +3,6 @@ package com.vetpulse.controller;
 
 import com.vetpulse.domain.Cliente;
 import com.vetpulse.service.ClienteService;
-import com.vetpulse.service.impl.FirebaseStorageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @Slf4j
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 public class ClienteController {
     
     @Autowired
@@ -27,42 +26,34 @@ public class ClienteController {
         var clientes = clienteService.getClientes(false);
         model.addAttribute("clientes", clientes);
         model.addAttribute("totalClientes", clientes.size());
-        return "/cliente/listado";
+        return "/clientes/listado";
     }
     
     @GetMapping("/nuevo")
     public String clienteNuevo(Cliente cliente) {
-        return "/cliente/modifica";
+        return "/clientes/modifica";
     }
-/*
-    @Autowired
-    private FirebaseStorageServiceImpl firebaseStorageService;
-   
+
     @PostMapping("/guardar")
     public String clienteGuardar(Cliente cliente,
             @RequestParam("imagenFile") MultipartFile imagenFile) {        
         if (!imagenFile.isEmpty()) {
-            clienteService.save(cliente);
-            cliente.setRutaImagen(
-                    firebaseStorageService.cargaImagen(
-                            imagenFile, 
-                            "cliente", 
-                            cliente.getIdCliente()));
+            // Procesar la carga de archivos aquí, si es necesario
         }
         clienteService.save(cliente);
-        return "redirect:/cliente/listado";
+        return "redirect:/clientes/listado";
     }
-*/ 
-    @GetMapping("/eliminar/{idCliente}")
+ 
+    @GetMapping("/eliminar/{clienteId}")
     public String clienteEliminar(Cliente cliente) {
         clienteService.delete(cliente);
-        return "redirect:/cliente/listado";
+        return "redirect:/clientes/listado";
     }
 
-    @GetMapping("/modificar/{idCliente}")
+    @GetMapping("/modificar/{clienteId}")
     public String clienteModificar(Cliente cliente, Model model) {
         cliente = clienteService.getCliente(cliente);
         model.addAttribute("cliente", cliente);
-        return "/cliente/modifica";
+        return "/clientes/modifica";
     }
 }
