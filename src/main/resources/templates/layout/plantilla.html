@@ -14,15 +14,15 @@
     <header th:fragment="header" class="header">
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
             <div class="container">
-                <a th:href="@{/admin}" class="navbar-brand">VetPulse - Administrador</a>
+                <a th:href="@{/admin}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <ul class="navbar-nav">
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/clientes}">Clientes</a></li>
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/mascotas}">Mascotas</a></li>
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/visitas}">Visitas</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/clientes}">[[#{plantilla.clientes}]]</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/mascotas}">[[#{plantilla.mascotas}]]</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/visitas}">[[#{plantilla.visitas}]]</a></li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
@@ -32,7 +32,7 @@
                                 <li><a class="dropdown-item" th:href="@{/(lang=en)}">EN</a></li>
                             </ul>
                         </li>
-                    </ul>                        
+                    </ul>  
                 </div>
             </div>
         </nav>
@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1><i class="fas fa-paw"></i> VetPulse - Administrador</h1>
+                        <h1><i class="fas fa-paw"></i>[[#{plantilla.suTienda}]]</h1>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
         <div class="container">
             <div class="col">
                 <p class="lead text-center">
-                    &COPY; 2024 VetPulse. Todos los derechos reservados.
+                    &COPY [[#{plantilla.derechos}]]
                 </p>
             </div>
         </div>
