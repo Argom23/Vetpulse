@@ -14,7 +14,7 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
-    private Long idCliente; // Hibernate Transforma el id en categoria
+    private Long idCliente;
     private String nombre;
     private String direccion;
     private String telefono;

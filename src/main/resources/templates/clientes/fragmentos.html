@@ -72,13 +72,12 @@
                                             <td>[[${cliente.nombre}]]</td>
                                             <td>[[${cliente.direccion}]]</td>
                                             <td>[[${cliente.telefono}]]</td>
-                                            <!-- Otros campos relevantes -->
                                             <td>
                                                 <!-- Botones de acciones para cada cliente -->
-                                                <a th:href="@{/cliente/editar/}+${cliente.id}" class="btn btn-success">
+                                                <a th:href="@{/cliente/editar/}+${cliente.idCliente}" class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
                                                 </a>
-                                                <a th:href="@{/cliente/eliminar/}+${cliente.id}" class="btn btn-danger">
+                                                <a th:href="@{/cliente/eliminar/}+${cliente.idCliente}" class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                                 </a>
                                             </td>
