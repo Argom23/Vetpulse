@@ -22,4 +22,5 @@ public interface ClienteService {
     // Se elimina el cliente que tiene el id pasado por parámetro
     public void delete(Cliente cliente);
     
+    public List<Cliente> buscarPorNombre(String nombre);
 }

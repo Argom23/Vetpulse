@@ -2,6 +2,7 @@ package com.vetpulse.controller;
 
 import com.vetpulse.domain.Mascota;
 import com.vetpulse.service.MascotaService;
+import com.vetpulse.service.impl.FirebaseStorageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,14 +34,22 @@ public class MascotaController {
         return "/mascotas/modifica";
     }
 
+    @Autowired
+    private FirebaseStorageServiceImpl firebaseStorageService;
+
     @PostMapping("/guardar")
     public String mascotaGuardar(Mascota mascota,
             @RequestParam("imagenFile") MultipartFile imagenFile) {        
         if (!imagenFile.isEmpty()) {
-            // Procesar la carga de archivos aquí, si es necesario
+            mascotaService.save(mascota);
+            mascota.setRutaImagen(
+                    firebaseStorageService.cargaImagen(
+                            imagenFile, 
+                            "mascota", 
+                            mascota.getIdMascota()));
         }
         mascotaService.save(mascota);
-        return "redirect:/mascotas/listado";
+        return "redirect:/mascota/listado";
     }
  
     @GetMapping("/eliminar/{mascotaId}")

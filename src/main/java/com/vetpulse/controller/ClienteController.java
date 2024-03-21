@@ -3,6 +3,7 @@ package com.vetpulse.controller;
 
 import com.vetpulse.domain.Cliente;
 import com.vetpulse.service.ClienteService;
+import com.vetpulse.service.impl.FirebaseStorageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,16 +33,6 @@ public class ClienteController {
     @GetMapping("/nuevo")
     public String clienteNuevo(Cliente cliente) {
         return "/clientes/modifica";
-    }
-
-    @PostMapping("/guardar")
-    public String clienteGuardar(Cliente cliente,
-            @RequestParam("imagenFile") MultipartFile imagenFile) {        
-        if (!imagenFile.isEmpty()) {
-            // Procesar la carga de archivos aquí, si es necesario
-        }
-        clienteService.save(cliente);
-        return "redirect:/clientes/listado";
     }
  
     @GetMapping("/eliminar/{clienteId}")

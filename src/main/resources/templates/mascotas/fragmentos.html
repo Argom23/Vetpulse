@@ -36,7 +36,39 @@
                         </div> 
                         <form th:action="@{/mascota/guardar}" th:object="${mascota}" method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
-                                <!-- Campos para agregar mascota -->
+                                <div class="mb-3">
+                                    <label for="cliente.idCliente">[[#{mascota.cliente}]]</label>
+                                    <select name="cliente.idCliente" class="form-control">
+                                        <option th:each="item : ${clientes}" th:value="${item.idCliente}">
+                                            [[${item.nombre}]]
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombre">[[#{mascota.nombre}]]</label>
+                                    <input type="text" class="form-control" name="nombre" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="especie">[[#{mascota.especie}]]</label>
+                                    <input type="text" class="form-control" name="especie" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="raza">[[#{mascota.raza}]]</label>
+                                    <input type="text" class="form-control" name="raza" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="edad">[[#{mascota.edad}]]</label>
+                                    <input type="number" class="form-control" name="edad" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imagen">[[#{mascota.imagen}]]</label>
+                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
+                                    <img id="blah" src="#" alt="your image" height="200"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="activo">[[#{mascota.activo}]]</label>
+                                    <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-primary" type="submit">[[#{accion.guardar}]]</button>
