@@ -14,7 +14,7 @@
     <header th:fragment="header" class="header">
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
             <div class="container">
-                <a th:href="@{/admin}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
+                <a th:href="@{/}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -23,6 +23,9 @@
                         <li class="nav-item px-2"><a class="nav-link" th:href="@{/clientes/listado}">[[#{plantilla.clientes}]]</a></li>
                         <li class="nav-item px-2"><a class="nav-link" th:href="@{/mascotas/listado}">[[#{plantilla.mascotas}]]</a></li>
                         <li class="nav-item px-2"><a class="nav-link" th:href="@{/visitas/listado}">[[#{plantilla.visitas}]]</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/historiales/listado}">[[#{plantilla.historiales}]]</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/medicamentos/listado}">[[#{plantilla.medicamentos}]]</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/veterinarios/listado}">[[#{plantilla.veterinarios}]]</a></li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">

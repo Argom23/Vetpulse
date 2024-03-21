@@ -1,6 +1,7 @@
 package com.vetpulse.domain;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -20,7 +21,12 @@ public class Cliente implements Serializable {
     private String telefono;
     private String correoElectronico;
     private boolean activo;
-
+    
+    @OneToMany
+    @JoinColumn(name="id_cliente", insertable=false, updatable=false)
+    List<Mascota> mascotas;
+    
+    
     public Cliente() {
     }
 
