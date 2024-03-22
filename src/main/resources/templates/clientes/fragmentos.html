@@ -83,6 +83,7 @@
                                             <th>[[#{cliente.nombre}]]</th>
                                             <th>[[#{cliente.direccion}]]</th>
                                             <th>[[#{cliente.telefono}]]</th>
+                                            <th>[[#{cliente.correo}]]</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -143,6 +144,9 @@
                                                 <label for="telefono">[[#{cliente.telefono}]]</label>
                                                 <input type="text" class="form-control" name="telefono" th:field="*{telefono}" required="true">
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="correo">[[#{cliente.correo}]]</label>
+                                                <input type="text" class="form-control" name="correo" th:field="*{correo}" required="true">
                                         </div>
                                     </div>
                                 </div>
