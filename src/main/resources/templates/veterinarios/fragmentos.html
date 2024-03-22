@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>VetPulse</title>
+    </head>
+    <body>
+        <!-- Sección para crear el botón de agregar -->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarVeterinario">
+                            <i class="fas fa-plus"></i> [[#{veterinario.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fragmento para agregar veterinario, es la ventana modal para poder agregarlos -->
+        <section th:fragment="agregarVeterinario">
+            <div id="agregarVeterinario" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{veterinario.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/veterinario/guardar}" th:object="${veterinario}" method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombre">[[#{veterinario.nombre}]]</label>
+                                    <input type="text" class="form-control" name="nombre" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="direccion">[[#{veterinario.direccion}]]</label>
+                                    <input type="text" class="form-control" name="direccion" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefono">[[#{veterinario.telefono}]]</label>
+                                    <input type="text" class="form-control" name="telefono" required="true"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">[[#{accion.guardar}]]</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Listado de veterinarios -->
+        <section th:fragment="listadoVeterinarios" id="veterinarios">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-16">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{veterinario.listado}]]</h4>
+                            </div>
+                            <div th:if="${veterinarios != null and !veterinarios.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>[[#{veterinario.nombre}]]</th>
+                                            <th>[[#{veterinario.direccion}]]</th>
+                                            <th>[[#{veterinario.telefono}]]</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="veterinario, contador : ${veterinarios}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${veterinario.nombre}]]</td>
+                                            <td>[[${veterinario.especialidad}]]</td>
+                                            <td>[[${veterinario.telefono}]]</td>
+                                            <td>
+                                                <!-- Botones de acciones para cada veterinario -->
+                                                <a th:href="@{/veterinario/editar/}+${veterinario.idVeterinario}" class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
+                                                </a>
+                                                <a th:href="@{/veterinario/eliminar/}+${veterinario.idVeterinario}" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${veterinarios == null or veterinarios.empty}">
+                                <span>[[#{lista.vacia}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- editarVeterinario -->
+        <section th:fragment="editarVeterinario">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST" th:action="@{/veterinario/guardar}" th:object="${veterinario}" class="was-validated">
+                        <!-- Aquí se pueden incluir campos ocultos si es necesario -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4>[[#{accion.actualizar}]]</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Campos de edición para el veterinario -->
+                                            <div class="mb-3">
+                                                <label for="nombre">[[#{veterinario.nombre}]]</label>
+                                                <input type="text" class="form-control" name="nombre" th:field="*{nombre}" required="true">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="direccion">[[#{veterinario.direccion}]]</label>
+                                                <input type="text" class="form-control" name="direccion" th:field="*{direccion}" required="true">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="telefono">[[#{veterinario.telefono}]]</label>
+                                                <input type="text" class="form-control" name="telefono" th:field="*{telefono}" required="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 d-grid">
+                                <a th:href="@{/veterinario/listado}" class="btn btn-primary">
+                                    <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">                                
+                                <a th:href="@{/veterinario/eliminar/}+${veterinario.id}" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- BOTONES EDITAR VETERINARIO -->
+        <section th:fragment="botonesEditarVeterinario">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/veterinario/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/veterinario/eliminar/}+${veterinario.id}" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

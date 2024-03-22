@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>VetPulse</title>
+    </head>
+    <body>
+        <!-- Sección para crear el botón de agregar -->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarVisita">
+                            <i class="fas fa-plus"></i> [[#{visita.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fragmento para agregar visita, es la ventana modal, para poder agregar visitas -->
+        <section th:fragment="agregarVisita">
+            <div id="agregarVisita" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{visita.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/visita/guardar}" th:object="${visita}" method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <!-- Aquí van los campos del formulario para agregar visita -->
+                                <div class="mb-3">
+                                    <label for="fechaHora">[[#{visita.fecha_hora}]]</label>
+                                    <input type="datetime-local" class="form-control" id="fechaHora" name="fechaHora" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mascota">[[#{visita.mascota}]]</label>
+                                    <input type="text" class="form-control" id="mascota" name="mascota" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="razon">[[#{visita.razon}]]</label>
+                                    <textarea class="form-control" id="razon" name="razon" required="true"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tratamiento">[[#{visita.tratamiento}]]</label>
+                                    <textarea class="form-control" id="tratamiento" name="tratamiento"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">[[#{accion.guardar}]]</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Listado de visitas -->
+        <section th:fragment="listadoVisitas">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{visita.listado}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>[[#{visita.fecha_hora}]]</th>
+                                            <th>[[#{visita.mascota}]]</th>
+                                            <th>[[#{visita.razon}]]</th>
+                                            <th>[[#{visita.tratamiento}]]</th>
+                                            <th>[[#{accion.opciones}]]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="visita, contador : ${visitas}">
+                                            <td th:text="${contador.count}"></td> 
+                                            <td th:text="${visita.fechaHora}"></td> 
+                                            <td th:text="${visita.idMascota}"></td> <!-- Cambiado a idMascota -->
+                                            <td th:text="${visita.razonVisita}"></td> 
+                                            <td th:text="${visita.tratamientoRealizado}"></td> 
+                                            <td> 
+                                                <a th:href="@{/visita/editar/}+${visita.idVisita}" class="btn btn-success"> 
+                                                    <i class="fas fa-pencil"></i> Editar 
+                                                </a> 
+                                                <a th:href="@{/visita/eliminar/}+${visita.idVisita}" class="btn btn-danger"> 
+                                                    <i class="fas fa-trash"></i> Eliminar 
+                                                </a> 
+                                            </td> 
+                                        </tr> 
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
