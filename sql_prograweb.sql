@@ -151,3 +151,12 @@ ADD COLUMN activo BOOLEAN DEFAULT TRUE;
 
 ALTER TABLE HistorialesMedicos
 ADD COLUMN activo BOOLEAN DEFAULT TRUE;
+
+ALTER TABLE Clientes
+ADD COLUMN psword INT DEFAULT 123456;
+
+ALTER TABLE Mascotas
+ADD COLUMN ruta_imagen VARCHAR(1024) DEFAULT "https://static.vecteezy.com/system/resources/previews/022/984/235/original/cartoon-dog-transparent-free-png.png";
+
+ALTER TABLE Medicamentos
+ADD COLUMN ruta_imagen VARCHAR(1024) DEFAULT "https://www.gaceta.unam.mx/wp-content/uploads/2021/10/211011-aca21-des-f1-antibioticos.jpg";
