@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @Slf4j
 @RequestMapping("/visitas")
-public class VisitasController {
+public class VisitaController {
 
     @Autowired
     private VisitasService visitasService;

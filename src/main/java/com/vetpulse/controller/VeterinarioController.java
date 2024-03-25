@@ -1,17 +1,17 @@
 package com.vetpulse.controller;
 
 import com.vetpulse.domain.Veterinarios;
-import com.vetpulse.service.VeterinariosService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.vetpulse.service.VeterinariosService;
 
 @Controller
 @Slf4j
 @RequestMapping("/veterinarios")
-public class VeterinariosController {
+public class VeterinarioController {
 
     @Autowired
     private VeterinariosService veterinariosService;

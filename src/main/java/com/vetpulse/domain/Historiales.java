@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="HistorialesMedicos")
+@Table(name="Historialesmedicos")
 public class Historiales implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -14,11 +14,7 @@ public class Historiales implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_historial")
-    private Long idHistorial;
-    
-    @Column(name = "id_mascota")
-    private Long idMascota;
-    
+    private Long idHistorial;    
     private String diagnostico;
     private String tratamiento;
     
@@ -26,15 +22,22 @@ public class Historiales implements Serializable {
     private String fechaHistorial;
     
     private boolean activo;
+    
+    @ManyToOne
+    @JoinColumn(name="id_mascota")
+    Mascota mascota;
 
     public Historiales() {
     }
-    
-    public Historiales(Long idMascota, String diagnostico, String tratamiento, String fechaHistorial, boolean activo) {
-        this.idMascota = idMascota;
+
+    public Historiales(String diagnostico, String tratamiento, String fechaHistorial, boolean activo, Mascota mascota) {
         this.diagnostico = diagnostico;
         this.tratamiento = tratamiento;
         this.fechaHistorial = fechaHistorial;
         this.activo = activo;
+        this.mascota = mascota;
     }
+    
+    
+    
 }

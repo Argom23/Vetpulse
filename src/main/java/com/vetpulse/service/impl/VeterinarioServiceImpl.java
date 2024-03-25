@@ -1,16 +1,16 @@
 package com.vetpulse.service.impl;
 
-import com.vetpulse.dao.VeterinariosDao;
 import com.vetpulse.domain.Veterinarios;
-import com.vetpulse.service.VeterinariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
+import com.vetpulse.service.VeterinariosService;
+import com.vetpulse.dao.VeterinariosDao;
 
 @Service
-public class VeterinariosServiceImpl implements VeterinariosService {
+public class VeterinarioServiceImpl implements VeterinariosService {
 
     @Autowired
     private VeterinariosDao veterinariosDao;

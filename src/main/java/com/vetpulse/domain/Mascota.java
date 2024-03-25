@@ -7,8 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -33,6 +35,11 @@ public class Mascota implements Serializable {
     @ManyToOne
     @JoinColumn(name="id_cliente")
     Cliente cliente;
+    
+    
+    @OneToMany
+    @JoinColumn(name="id_cliente", insertable=false, updatable=false)
+    List<Visitas> visitas;
 
     public Mascota() {
     }

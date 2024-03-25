@@ -85,17 +85,9 @@
                                         <tr th:each="visita, contador : ${visitas}">
                                             <td th:text="${contador.count}"></td> 
                                             <td th:text="${visita.fechaHora}"></td> 
-                                            <td th:text="${visita.idMascota}"></td> <!-- Cambiado a idMascota -->
+                                            <td th:text="${visita.mascota.nombre}"></td> <!-- Cambiado a idMascota -->
                                             <td th:text="${visita.razonVisita}"></td> 
-                                            <td th:text="${visita.tratamientoRealizado}"></td> 
-                                            <td> 
-                                                <a th:href="@{/visita/editar/}+${visita.idVisita}" class="btn btn-success"> 
-                                                    <i class="fas fa-pencil"></i> Editar 
-                                                </a> 
-                                                <a th:href="@{/visita/eliminar/}+${visita.idVisita}" class="btn btn-danger"> 
-                                                    <i class="fas fa-trash"></i> Eliminar 
-                                                </a> 
-                                            </td> 
+                                            <td th:text="${visita.tratamientoRealizado}"></td>
                                         </tr> 
 
                                     </tbody>
