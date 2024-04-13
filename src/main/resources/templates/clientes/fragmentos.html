@@ -34,7 +34,7 @@
                             <h5 class="modal-title">[[#{cliente.agregar}]]</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/cliente/guardar}" th:object="${cliente}" method="POST" class="was-validated" enctype="multipart/form-data">
+                        <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="nombre">[[#{cliente.nombre}]]</label>
@@ -95,10 +95,10 @@
                                             <td>[[${cliente.telefono}]]</td>
                                             <td>
                                                 <!-- Botones de acciones para cada cliente -->
-                                                <a th:href="@{/cliente/editar/}+${cliente.idCliente}" class="btn btn-success">
+                                                <a th:href="@{/clientes/modifica/}+${cliente.idCliente}" class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
                                                 </a>
-                                                <a th:href="@{/cliente/eliminar/}+${cliente.idCliente}" class="btn btn-danger">
+                                                <a th:href="@{/clientes/eliminar/}+${cliente.idCliente}" class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                                 </a>
                                             </td>
@@ -121,7 +121,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <form method="POST" th:action="@{/cliente/guardar}" th:object="${cliente}" class="was-validated">
+                    <form method="POST" th:action="@{/clientes/guardar}" th:object="${cliente}" class="was-validated">
                         <!-- Aquí se pueden incluir campos ocultos si es necesario -->
                         <div class="container">
                             <div class="row">
@@ -154,12 +154,12 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4 d-grid">
-                                <a th:href="@{/cliente/listado}" class="btn btn-primary">
+                                <a th:href="@{/clientes/listado}" class="btn btn-primary">
                                     <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                                 </a>
                             </div>
                             <div class="col-md-4 d-grid">                                
-                                <a th:href="@{/cliente/eliminar/}+${cliente.id}" class="btn btn-danger">
+                                <a th:href="@{/clientes/eliminar/}+${cliente.id}" class="btn btn-danger">
                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                 </a>
                             </div>
@@ -180,12 +180,12 @@
             <div class="container py-4 mb-4 bg-light">
                 <div class="row">
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/cliente/listado}" class="btn btn-primary">
+                        <a th:href="@{/clientes/listado}" class="btn btn-primary">
                             <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                         </a>
                     </div>
                     <div class="col-md-4 d-grid">                                
-                        <a th:href="@{/cliente/eliminar/}+${cliente.id}" class="btn btn-danger">
+                        <a th:href="@{/clientes/eliminar/}+${cliente.id}" class="btn btn-danger">
                             <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                         </a>
                     </div>

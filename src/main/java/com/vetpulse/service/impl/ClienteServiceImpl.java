@@ -5,7 +5,9 @@
 package com.vetpulse.service.impl;
 
 import com.vetpulse.dao.ClienteDao;
+import com.vetpulse.dao.RolDao;
 import com.vetpulse.domain.Cliente;
+import com.vetpulse.domain.Rol;
 import com.vetpulse.service.ClienteService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +20,13 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Autowired
     private ClienteDao clienteDao;
-    
+    @Autowired
+    private RolDao rolDao;
+
     @Override
     @Transactional(readOnly = true)
-    public List<Cliente> getClientes(boolean activos) {
-        List<Cliente> lista = clienteDao.findAll();
-        
-        if(activos == true){
-            // Remover los elementos inactivos
-            lista.removeIf(c -> !c.isActivo());
-        }
-        
-        return lista;
+    public List<Cliente> getClientes() {
+        return clienteDao.findAll();
     }
 
     @Override
@@ -39,20 +36,44 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Cliente getClientePorUsername(String username) {
+        return clienteDao.findByUsername(username);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Cliente getClientePorUsernameYPassword(String username, String password) {
+        return clienteDao.findByUsernameAndPassword(username, password);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Cliente getClientePorUsernameOCorreo(String username, String correo) {
+        return clienteDao.findByUsernameOrCorreo(username, correo);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existeClientePorUsernameOCorreo(String username, String correo) {
+        return clienteDao.existsByUsernameOrCorreo(username, correo);
+    }
+
+    @Override
     @Transactional
-    public void save(Cliente cliente) {
-        clienteDao.save(cliente);
+    public void save(Cliente cliente, boolean crearRolUser) {
+        cliente=clienteDao.save(cliente);
+        if (crearRolUser) {  //Si se está creando el cliente, se crea el rol por defecto "USER"
+            Rol rol = new Rol();
+            rol.setNombre("ROLE_USER");
+            rol.setIdCliente(cliente.getIdCliente());
+            rolDao.save(rol);
+        }
     }
 
     @Override
     @Transactional
     public void delete(Cliente cliente) {
         clienteDao.delete(cliente);
-    }
-    
-    @Override
-    @Transactional(readOnly=true)
-    public List<Cliente> buscarPorNombre(String nombre) {
-        return clienteDao.findByNombre(nombre);
     }
 }

@@ -10,17 +10,28 @@ import java.util.List;
 
 public interface ClienteService {
     
-    public List<Cliente> getClientes(boolean activos);
+    // Se obtiene un listado de Clientes en un List
+    public List<Cliente> getClientes();
     
-    // Se obtiene un Cliente, a partir del id de un cliente
+    // Se obtiene un Cliente, a partir del id de un Cliente
     public Cliente getCliente(Cliente cliente);
     
-    // Se inserta un nuevo cliente si el id del cliente esta vacío
-    // Se actualiza un cliente si el id del cliente NO esta vacío
-    public void save(Cliente cliente);
+    // Se obtiene un Cliente, a partir del username de un Cliente
+    public Cliente getClientePorUsername(String username);
+
+    // Se obtiene un Cliente, a partir del username y el password de un Cliente
+    public Cliente getClientePorUsernameYPassword(String username, String password);
     
-    // Se elimina el cliente que tiene el id pasado por parámetro
+    // Se obtiene un Cliente, a partir del username y el password de un Cliente
+    public Cliente getClientePorUsernameOCorreo(String username, String correo);
+    
+    // Se valida si existe un Cliente considerando el username
+    public boolean existeClientePorUsernameOCorreo(String username, String correo);
+    
+    // Se inserta un nuevo Cliente si el id del Cliente esta vacío
+    // Se actualiza un Cliente si el id del Cliente NO esta vacío
+    public void save(Cliente cliente,boolean crearRolUser);
+    
+    // Se elimina el Cliente que tiene el id pasado por parámetro
     public void delete(Cliente cliente);
-    
-    public List<Cliente> buscarPorNombre(String nombre);
 }

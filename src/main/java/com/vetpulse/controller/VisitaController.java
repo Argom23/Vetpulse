@@ -33,7 +33,7 @@ public class VisitaController {
     @PostMapping("/guardar")
     public String guardarVisita(@ModelAttribute("visita") Visitas visita) {
         visitasService.guardarVisita(visita);
-        return "redirect:/visitas/listado";
+        return "redirect:/";
     }
 
     @GetMapping("/eliminar/{visitaId}")
