@@ -5,10 +5,10 @@
     <head th:replace="~{layout/plantilla :: head}">
         <title>VetPulse</title>
     </head>
-    <body>
+    <body class="bg-dark text-light">
+
         <!-- Sección para crear el botón de agregar -->
-        <!-- Aqui se realiza la creacion del boton agregar-->
-        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+        <section th:fragment="botonesAgregar" class="py-4 mb-4">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">   
@@ -25,11 +25,10 @@
         </section>
 
         <!-- Fragmento para agregar medicamento, es la ventana modal, para poder agregar medicamentos -->
-
         <section th:fragment="agregarMedicamento">
             <div id="agregarMedicamento" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md">
-                    <div class="modal-content">
+                    <div class="modal-content bg-dark text-light">
                         <div class="modal-header bg-info text-white">
                             <h5 class="modal-title">[[#{medicamento.agregar}]]</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -71,18 +70,18 @@
             </div>
         </section>
 
-        <!-- CLIENTES -->
+        <!-- Listado de medicamentos -->
         <section th:fragment="listadoMedicamentos" id="medicamentos">
             <div class="container">
                 <div class="row">
                     <div class="col-md-16">
-                        <div class="card">
+                        <div class="card bg-dark">
                             <div class="card-header">
                                 <h4>[[#{medicamento.listado}]]</h4>
                             </div>
                             <div th:if="${medicamentos != null and !medicamentos.empty}">
-                                <table class="table table-striped table-hover">
-                                    <thead class="table-dark">
+                                <table class="table table-striped table-hover table-dark">
+                                    <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>[[#{medicamento.nombre}]]</th>
@@ -132,7 +131,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card">
+                                    <div class="card bg-dark text-light">
                                         <div class="card-header">
                                             <h4>[[#{accion.actualizar}]]</h4>
                                         </div>
@@ -193,10 +192,9 @@
             </div>
         </section>
 
-
         <!-- BOTONES EDITAR -->
         <section th:fragment="botonesEditar">
-            <div class="container py-4 mb-4 bg-light">
+            <div class="container py-4 mb-4">
                 <div class="row">
                     <div class="col-md-4 d-grid">
                         <a th:href="@{/medicamento/listado}" class="btn btn-primary">

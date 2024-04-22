@@ -1,12 +1,84 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="layout/plantilla :: head">
-    </head>
-    <body>
-        <header th:replace="layout/plantilla :: header"></header>
-        
-        <footer th:replace="layout/plantilla :: footer"></footer>
-        <div></div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>VetPulse</title>
+    <style>
+        /* Estilo personalizado para el tema oscuro */
+        :root {
+            --color-primary: #2b2b2b; /* Negro */
+            --color-secondary: #ffffff; /* Blanco */
+            --color-tertiary: #212529; /* Gris oscuro */
+            --color-text: #ffffff; /* Blanco para el texto */
+        }
+
+        body {
+            background-color: var(--color-tertiary);
+            color: var(--color-text);
+        }
+
+        /* Estilo para el contenedor del carrusel */
+        #carouselContainer {
+            text-align: center;
+            align-content: center;
+            max-width: 500px;
+            margin: 0 auto; /* Centro horizontalmente */
+        }
+
+        /* Estilo para las imágenes del carrusel */
+        .carousel-item img {
+            text-align: center;
+            align-content: center;
+            max-width: 500px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+<div class="container my-5">
+    <div class="row align-items-center">
+        <div class="col-md-12">
+            <div id="carouselContainer" class="text-center">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://images.ctfassets.net/sfnkq8lmu5d7/1NaIFGyBn0qwXYlNaCJSEl/ad59ce5eefa3c2322b696778185cc749/2021_0825_Kitten_Health.jpg?w=1000&h=750&fl=progressive&q=70&fm=jpg" class="d-block" alt="Animal 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://cdn.britannica.com/57/192357-050-62E912BD/hamster-Syria-households-pet.jpg" class="d-block" alt="Animal 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://media.4-paws.org/1/e/d/6/1ed6da75afe37d82757142dc7c6633a532f53a7d/VIER%20PFOTEN_2019-03-15_001-2886x1999-1920x1330.jpg" class="d-block" alt="Animal 3">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" id="mainContent">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h2>Bienvenido a VetPulse</h2>
+            <p class="lead">En VetPulse, nos dedicamos a brindar atención médica veterinaria de calidad para tus mascotas. Nuestro equipo de profesionales altamente capacitados está aquí para ayudarte a cuidar de tus amigos peludos.</p>
+            <p>Explora nuestros servicios y conoce a nuestro equipo de médicos veterinarios comprometidos con la salud y el bienestar de tu mascota.</p>
+            <a href="#" class="btn btn-primary">Explorar Servicios</a>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
 </html>
