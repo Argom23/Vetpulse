@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/plantilla :: head"></head>
-<body>
-    <header th:replace="layout/plantilla :: header"></header>
+    <head th:replace="layout/plantilla :: head"></head>
 
-    <section th:replace="veterinarios/fragmentos :: botonesAgregar"></section>
-    <section th:replace="veterinarios/fragmentos :: agregarVeterinario"></section>
-    <section th:replace="veterinarios/fragmentos :: listadoVeterinarios"></section>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
 
-    <footer th:replace="layout/plantilla :: footer"></footer>
-</body>
+        <section th:replace="veterinarios/fragmentos :: botonesAgregar"></section>
+        <section th:replace="veterinarios/fragmentos :: agregarVeterinario"></section>
+        <section th:replace="veterinarios/fragmentos :: listadoVeterinarios"></section>
+
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
 </html>
