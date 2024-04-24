@@ -60,7 +60,7 @@ public class RegistroController {
     public String activar(
             Cliente cliente, 
             @RequestParam("imagenFile") MultipartFile imagenFile) {
-        registroService.activar(cliente, imagenFile);
+        registroService.activar(cliente);
         return "redirect:/";
     }
 

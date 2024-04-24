@@ -36,15 +36,15 @@ public class VeterinarioController {
         return "redirect:/veterinarios/listado";
     }
 
-    @GetMapping("/eliminar/{veterinarioId}")
-    public String veterinarioEliminar(@PathVariable Long veterinarioId) {
-        veterinariosService.delete(veterinarioId);
+    @GetMapping("/eliminar/{idVeterinario}")
+    public String veterinarioEliminar(@PathVariable Long idVeterinario) {
+        veterinariosService.delete(idVeterinario);
         return "redirect:/veterinarios/listado";
     }
 
-    @GetMapping("/modificar/{veterinarioId}")
-    public String veterinarioModificar(@PathVariable Long veterinarioId, Model model) {
-        Veterinarios veterinario = veterinariosService.getVeterinarios(veterinarioId);
+    @GetMapping("/modificar/{idVeterinario}")
+    public String veterinarioModificar(@PathVariable Long idVeterinario, Model model) {
+        Veterinarios veterinario = veterinariosService.getVeterinarios(idVeterinario);
         model.addAttribute("veterinario", veterinario);
         return "/veterinarios/modifica";
     }

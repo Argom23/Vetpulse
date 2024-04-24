@@ -48,20 +48,12 @@ public class ClienteController {
             cliente.setUsername(actual.getUsername());
             cliente.setActivo(actual.isActivo());
             cliente.setRoles(actual.getRoles());
-            if (imagenFile.isEmpty()) {
-                cliente.setRutaImagen(actual.getRutaImagen());
-            }
         } else {
             cliente.setPassword(new BCryptPasswordEncoder().encode(cliente.getPassword()));
             cliente.setActivo(true); // Para crearlo siempre activo
         }
         if (!imagenFile.isEmpty()) {
             clienteService.save(cliente, false);
-            cliente.setRutaImagen(
-                    firebaseStorageService.cargaImagen(
-                            imagenFile,
-                            "cliente",
-                            cliente.getIdCliente()));
         }
         clienteService.save(cliente, nuevo);
         return "redirect:/clientes/listado";

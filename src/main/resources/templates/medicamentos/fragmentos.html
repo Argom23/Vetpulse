@@ -100,10 +100,10 @@
                                             <td>[[${medicamento.precio}]]</td>
                                             <td>
                                                 <!-- Botones de acciones para cada medicamento -->
-                                                <a th:href="@{/medicamento/editar/}+${medicamento.idMedicamento}" class="btn btn-success">
+                                                <a th:href="@{/medicamentos/modificar/}+${medicamento.idMedicamento}" class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
                                                 </a>
-                                                <a th:href="@{/medicamento/eliminar/}+${medicamento.idMedicamento}" class="btn btn-danger">
+                                                <a th:href="@{/medicamentos/eliminar/}+${medicamento.idMedicamento}" class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                                 </a>
                                             </td>

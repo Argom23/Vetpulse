@@ -49,18 +49,9 @@ public class RegistroServiceImpl implements RegistroService {
     }
 
     @Override
-    public void activar(Cliente cliente, MultipartFile imagenFile) {
+    public void activar(Cliente cliente) {
         var codigo = new BCryptPasswordEncoder();
         cliente.setPassword(codigo.encode(cliente.getPassword()));
-
-        if (!imagenFile.isEmpty()) {
-            clienteService.save(cliente, false);
-            cliente.setRutaImagen(
-                    firebaseStorageService.cargaImagen(
-                            imagenFile, 
-                            "clientes", 
-                            cliente.getIdCliente()));
-        }
         clienteService.save(cliente, true);
     }
 

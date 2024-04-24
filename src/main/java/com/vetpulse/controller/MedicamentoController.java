@@ -56,13 +56,13 @@ public class MedicamentoController {
         return "redirect:/medicamento/listado";
     }
  
-    @GetMapping("/eliminar/{medicamentoId}")
+    @GetMapping("/eliminar/{idMedicamento}")
     public String medicamentoEliminar(Medicamento medicamento) {
         medicamentoService.delete(medicamento);
         return "redirect:/medicamentos/listado";
     }
 
-    @GetMapping("/modificar/{medicamentoId}")
+    @GetMapping("/modificar/{idMedicamento}")
     public String medicamentoModificar(Medicamento medicamento, Model model) {
         medicamento = medicamentoService.getMedicamento(medicamento);
         model.addAttribute("medicamento", medicamento);

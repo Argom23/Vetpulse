@@ -37,7 +37,6 @@ public class ClienteDetailsServiceImpl implements ClienteDetailsService, UserDet
             throw new UsernameNotFoundException(username);
         }
         session.removeAttribute("clienteImagen");
-        session.setAttribute("clienteImagen", cliente.getRutaImagen());
         //Si está acá es porque existe el cliente... sacamos los roles que tiene
         var roles = new ArrayList<GrantedAuthority>();
         for (Rol rol : cliente.getRoles()) {   //Se sacan los roles

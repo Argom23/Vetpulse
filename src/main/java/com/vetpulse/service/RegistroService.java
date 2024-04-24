@@ -15,7 +15,7 @@ public interface RegistroService {
 
     public Model crearCliente(Model model, Cliente cliente) throws MessagingException;
     
-    public void activar(Cliente cliente, MultipartFile imagenFile);
+    public void activar(Cliente cliente);
     
     public Model recordarCliente(Model model, Cliente cliente) throws MessagingException;
 }

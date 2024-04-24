@@ -104,7 +104,7 @@
                                     <td th:text="${cliente.direccion}"></td>
                                     <td th:text="${cliente.telefono}"></td>
                                     <td>
-                                        <a th:href="@{/clientes/modifica/}+${cliente.idCliente}" class="btn btn-success">
+                                        <a th:href="@{/clientes/modificar/}+${cliente.idCliente}" class="btn btn-success">
                                             <i class="fas fa-pencil"></i> Actualizar
                                         </a>
                                         <a th:href="@{/clientes/eliminar/}+${cliente.idCliente}" class="btn btn-danger">

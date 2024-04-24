@@ -28,7 +28,6 @@ public class Cliente implements Serializable {
     private String username;
     @NotEmpty
     private String password;
-    private String rutaImagen;
     
     @OneToMany
     @JoinColumn(name="id_cliente", insertable=false, updatable=false)
